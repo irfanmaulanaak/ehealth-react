@@ -18,10 +18,15 @@ class FormPasien extends Component {
   submitPasien = async (event) => {
     event.preventDefault()
     const accounts = await web3.eth.getAccounts()
-
-    await ehealth.methods
-      .addPasien(this.state.nama, this.state.umur, this.state.alamat)
-      .send({ from: accounts[0] })
+    console.log(accounts[0])
+    try {
+      await ehealth.methods
+        .addPasien(this.state.nama, this.state.umur, this.state.alamat)
+        .send({ from: accounts[0] })
+    } catch (error) {
+      console.log(error)
+      
+    }
   }
   render() {
     return (
@@ -52,4 +57,4 @@ class FormPasien extends Component {
     )
   }
 }
-export default FormPasien;
+export default FormPasien

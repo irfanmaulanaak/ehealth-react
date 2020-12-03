@@ -18,7 +18,7 @@ class FormTenkes extends Component {
   submitTenkes = async (event) => {
     event.preventDefault()
     const accounts = await web3.eth.getAccounts()
-
+    console.log(this.state.nama,", ", this.state.umur,", ", this.state.alamat)
     await ehealth.methods
       .addTenkes(this.state.nama, this.state.umur, this.state.alamat)
       .send({ from: accounts[0] })
@@ -42,7 +42,7 @@ class FormTenkes extends Component {
             placeholder="Umur"
             required
             umur={this.state.umur}
-            onChange={(e) => this.setState({ nama: e.target.value })}
+            onChange={(e) => this.setState({ umur: e.target.value })}
           />
           <br />
           <label>*Alamat: </label>
@@ -50,7 +50,7 @@ class FormTenkes extends Component {
             placeholder="Alamat"
             required
             alamat={this.state.alamat}
-            onChange={(e) => this.setState({ nama: e.target.value })}
+            onChange={(e) => this.setState({ alamat: e.target.value })}
           />
           <button>Enter</button>
         </div>

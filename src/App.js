@@ -25,6 +25,7 @@ class App extends Component {
 
   async componentDidMount() {
     const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
     const result_status_tenkes = await ehealth.methods
       .check_tenkes()
       .call({ from: accounts[0] })
@@ -35,6 +36,8 @@ class App extends Component {
       pasien_status: result_status_pasien,
       tenkes_status: result_status_tenkes,
     })
+    console.log("status pasien: ", result_status_pasien)
+    console.log("status tenkes: ", result_status_tenkes)
     const result_pasien = await ehealth.methods
       .getpasien_pasien()
       .call({ from: accounts[0] })
