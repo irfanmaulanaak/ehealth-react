@@ -10,7 +10,7 @@ class FormPenyakit extends Component {
       addPenyakit: '',
       pasien: [],
       penyakit: [],
-      status: false
+      status: false,
     }
   }
   submitPenyakit = async (event) => {
@@ -43,9 +43,15 @@ class FormPenyakit extends Component {
     for (var i in obj) {
       a.push(obj[i])
     }
-    this.setState({ penyakit: result_penyakit })
-    this.setState({ pasien: a })
-    this.setState({ status:true })
+    //pengecekan untuk nik pasien apakah valid atau tidak
+    if (a[1] == 0) {
+      this.setState({ status: false })
+      alert("Data pasien tidak ditemukan!")
+    }else{
+      this.setState({ penyakit: result_penyakit })
+      this.setState({ pasien: a })
+      this.setState({ status: true })
+    }
   }
   render() {
     return (
@@ -70,7 +76,7 @@ class FormPenyakit extends Component {
             addPenyakit={this.state.addPenyakit}
             onChange={(e) => this.setState({ addPenyakit: e.target.value })}
           />
-          <br/>
+          <br />
           <button>Enter</button>
         </form>
         {this.state.status ? (
