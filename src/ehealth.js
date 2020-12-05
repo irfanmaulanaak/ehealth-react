@@ -1,6 +1,6 @@
 import web3 from './web3'
 
-const address = '0x859Ff0a06DF9029E6782Be772b33E4077e3D19DC'
+const address = '0xA3F6D0b622eb8A9BA3ea5C8Fcd8c7561fdF90d19'
 
 const abi = [
   {
@@ -41,6 +41,20 @@ const abi = [
   },
   {
     constant: true,
+    inputs: [{ name: '_nik', type: 'uint256' }],
+    name: 'getpasien_tenkes',
+    outputs: [
+      { name: '', type: 'uint256' },
+      { name: '', type: 'string' },
+      { name: '', type: 'uint8' },
+      { name: '', type: 'string' },
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: true,
     inputs: [],
     name: 'check_pasien',
     outputs: [{ name: '', type: 'bool' }],
@@ -49,16 +63,12 @@ const abi = [
     type: 'function',
   },
   {
-    constant: false,
-    inputs: [
-      { name: '_nama', type: 'string' },
-      { name: '_umur', type: 'uint8' },
-      { name: '_alamat', type: 'string' },
-    ],
-    name: 'addPasien',
-    outputs: [],
+    constant: true,
+    inputs: [{ name: '_nik', type: 'uint256' }],
+    name: 'getpenyakit_tenkes',
+    outputs: [{ name: '', type: 'string[]' }],
     payable: false,
-    stateMutability: 'nonpayable',
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -68,6 +78,20 @@ const abi = [
     outputs: [{ name: '', type: 'string[]' }],
     payable: false,
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    constant: false,
+    inputs: [
+      { name: '_nik', type: 'uint256' },
+      { name: '_nama', type: 'string' },
+      { name: '_umur', type: 'uint8' },
+      { name: '_alamat', type: 'string' },
+    ],
+    name: 'addPasien',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {

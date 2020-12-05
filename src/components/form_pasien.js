@@ -6,14 +6,15 @@ class FormPasien extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      nik: '',
       nama: '',
       umur: '',
       alamat: '',
     }
   }
   componentDidMount() {
-    const { nama, umur, alamat } = this.props
-    this.setState({ nama: nama, umur: umur, alamat: alamat })
+    const {nik, nama, umur, alamat } = this.props
+    this.setState({nik: nik, nama: nama, umur: umur, alamat: alamat })
   }
   submitPasien = async (event) => {
     event.preventDefault()
@@ -21,7 +22,7 @@ class FormPasien extends Component {
     console.log(accounts[0])
     try {
       await ehealth.methods
-        .addPasien(this.state.nama, this.state.umur, this.state.alamat)
+        .addPasien(this.state.nik, this.state.nama, this.state.umur, this.state.alamat)
         .send({ from: accounts[0] })
     } catch (error) {
       console.log(error)
@@ -34,6 +35,12 @@ class FormPasien extends Component {
         <div>
           <hr />
           <h2>Form Pasien</h2>
+          <label>NIK: </label>
+          <input
+            value={this.state.nik}
+            onChange={(event) => this.setState({ nik: event.target.value })}
+          />
+          <br />
           <label>Nama: </label>
           <input
             value={this.state.nama}

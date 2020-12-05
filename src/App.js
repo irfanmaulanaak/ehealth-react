@@ -36,28 +36,32 @@ class App extends Component {
       pasien_status: result_status_pasien,
       tenkes_status: result_status_tenkes,
     })
-    console.log("status pasien: ", result_status_pasien)
-    console.log("status tenkes: ", result_status_tenkes)
-    const result_pasien = await ehealth.methods
-      .getpasien_pasien()
-      .call({ from: accounts[0] })
-    const result_penyakit = await ehealth.methods
-      .getpenyakit_pasien()
-      .call({ from: accounts[0] })
-    const manager = await ehealth.methods
-      .getManager()
-      .call({ from: accounts[0] })
-    if (manager == accounts[0]) {
-      this.setState({ manager: true })
-    }
-    var a = []
-    var obj = JSON.parse(JSON.stringify(result_pasien))
+    console.log('status pasien: ', result_status_pasien)
+    console.log('status tenkes: ', result_status_tenkes)
+    try {
+      const result_pasien = await ehealth.methods
+        .getpasien_pasien()
+        .call({ from: accounts[0] })
+      const result_penyakit = await ehealth.methods
+        .getpenyakit_pasien()
+        .call({ from: accounts[0] })
+      const manager = await ehealth.methods
+        .getManager()
+        .call({ from: accounts[0] })
+      if (manager == accounts[0]) {
+        this.setState({ manager: true })
+      }
+      var a = []
+      var obj = JSON.parse(JSON.stringify(result_pasien))
 
-    for (var i in obj) {
-      a.push(obj[i])
+      for (var i in obj) {
+        a.push(obj[i])
+      }
+      this.setState({ penyakit: result_penyakit })
+      this.setState({ pasien: a })
+    } catch (error) {
+      console.log(error)
     }
-    this.setState({ penyakit: result_penyakit })
-    this.setState({ pasien: a })
   }
   render() {
     return (
